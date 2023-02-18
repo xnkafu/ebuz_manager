@@ -1,0 +1,56 @@
+package com.selacha.start.controller;
+
+import java.awt.image.BufferedImage;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.selacha.start.domain.ItemInventory;
+import com.selacha.start.service.implementation.ItemInventoryServiceImplementation;
+
+@RestController
+@RequestMapping("v1/api/itemInventory")
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
+public class ItemInventoryController {
+
+	@Autowired
+	private ItemInventoryServiceImplementation itemInventoryService;
+
+	@GetMapping(value="/{id}", produces = "application/json")
+	public ResponseEntity<ItemInventory> findById(@PathVariable  Long id) {
+
+		ItemInventory itemInventory = itemInventoryService.findItemInventory(id);
+
+		return itemInventory != null? new ResponseEntity<ItemInventory>(itemInventory, HttpStatus.OK): new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+
+	@PostMapping(value="/createItemInventory", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_GIF_VALUE})
+	public  ResponseEntity<BufferedImage> create(@RequestBody ItemInventory  itemInventory){
+		BufferedImage image = itemInventoryService.saveItemInventory(itemInventory);
+		return  new ResponseEntity<>(image, HttpStatus.OK);
+
+	}
+	
+	@GetMapping(value="/itemInventories", produces = "application/json")
+	public ResponseEntity<List<ItemInventory>> getItem(){
+		return new ResponseEntity<List<ItemInventory>>(itemInventoryService.allItemInventories(),HttpStatus.OK);
+		
+	}
+	
+	@DeleteMapping(value="/{id}", produces = "application/json")
+	public ResponseEntity<Boolean> deleteItem(@PathVariable  Long id){
+		boolean deleted = itemInventoryService.deleteItemInventory(id);
+		return deleted? new ResponseEntity<Boolean>(HttpStatus.OK): new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		
+	}
+}
