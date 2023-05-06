@@ -1,6 +1,8 @@
 package com.selacha.start.domain;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -20,13 +22,14 @@ public class ItemInventory {
 	private String serialNum;
 	
 	@Column
-	private Date dateAdded;
+	private LocalDate dateAdded;
 	
 	@Column
-	private Date dateSold;
+	private LocalDate dateSold;
 	
-	@Column
-	private String soldBy;
+	//@Column
+	@ManyToOne
+	private Employee soldBy;
 	
 	@Column
 	private double soldFor;
@@ -40,8 +43,20 @@ public class ItemInventory {
 	@Column
 	private String barcode;
 	
-	@Transient
-	private int quantity;
+	//@Transient
+	//private int quantity;
+	
+	@Column
+	private String shipmentDate;
+	
+	@Column
+	private String confirmationCode;
+	
+	@ManyToOne
+	private Customer customer;
+	
+	@Column
+	private String timeStamp;
 	
 
 }

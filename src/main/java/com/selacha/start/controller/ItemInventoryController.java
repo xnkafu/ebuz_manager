@@ -16,8 +16,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.selacha.start.domain.ItemInventory;
+import com.selacha.start.domain.ItemStock;
+import com.selacha.start.domain.Sales;
+import com.selacha.start.domain.SalesObject;
 import com.selacha.start.service.implementation.ItemInventoryServiceImplementation;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("v1/api/itemInventory")
 @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
@@ -47,10 +53,23 @@ public class ItemInventoryController {
 		
 	}
 	
+	@GetMapping(value="/stock", produces = "application/json")
+	public ResponseEntity<List<ItemStock>> getStock(){
+		return new ResponseEntity<List<ItemStock>>(itemInventoryService.showStock(),HttpStatus.OK);
+		
+	}
+	
 	@DeleteMapping(value="/{id}", produces = "application/json")
 	public ResponseEntity<Boolean> deleteItem(@PathVariable  Long id){
 		boolean deleted = itemInventoryService.deleteItemInventory(id);
 		return deleted? new ResponseEntity<Boolean>(HttpStatus.OK): new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		
+	}
+	
+	@PostMapping(value="/performSaleNS",produces = "application/json")
+	public  ResponseEntity<Sales> saveSaleNoScanner(@RequestBody SalesObject salesObject){
+		Sales sale = itemInventoryService.performSaleNoScanner(salesObject);
+		log.info(sale.toString());
+		return new ResponseEntity<Sales>( sale,HttpStatus.OK);
 	}
 }

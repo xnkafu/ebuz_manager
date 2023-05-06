@@ -51,5 +51,10 @@ public class ItemServiceImplementation implements ItemService {
 	public List<Item> allItems() {
 		return itemRepo.findAll();
 	}
+	
+	public List<Item> allItemsStock() {
+		return itemRepo.findAll();
+	}
+
 
 }

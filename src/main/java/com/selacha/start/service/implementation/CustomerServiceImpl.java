@@ -35,6 +35,17 @@ public class CustomerServiceImpl implements CustomerService{
 		}
 		return customer;
 	}
+	
+	
+	public Customer findByPhone(String phoneNumber) {
+		
+		Optional<Customer> tempCus = customerRepo.findByPhone(phoneNumber);
+		if ( tempCus.isEmpty()) {
+			return null;
+		} else {
+		return tempCus.get();
+		}
+	}
 
 	@Override
 	public List<Customer> getCustomers() {
