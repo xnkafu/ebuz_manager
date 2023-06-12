@@ -6,7 +6,7 @@ import com.selacha.start.domain.Customer;
 
 public interface CustomerService {
 	
-	public Customer saveCustomer(Customer cus);
+	public Customer saveCustomer(Customer cus) throws Exception;
 	public List<Customer> getCustomers();
 
 }

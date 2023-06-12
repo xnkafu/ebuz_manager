@@ -10,5 +10,6 @@ import com.selacha.start.domain.Item;
 public interface ItemRepo extends JpaRepository<Item,Long> {
 	
 	public Optional<Item> findByname(String name);
+	public Optional<Item> findByNameAndModel(String name,String model);
 
 }

@@ -18,7 +18,7 @@ public class ItemServiceImplementation implements ItemService {
 
 	@Override
 	public Item saveItem(Item item) {
-		Optional<Item> itemTemp =  itemRepo.findByname(item.getName());
+		Optional<Item> itemTemp =  itemRepo.findByNameAndModel(item.getName(), item.getModel());
 		if (itemTemp.isEmpty()) {
 			return itemRepo.save(item);
 			

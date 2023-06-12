@@ -17,9 +17,13 @@ import com.selacha.start.domain.Employee;
 import com.selacha.start.service.implementation.CustomerServiceImpl;
 import com.selacha.start.service.implementation.EmployeeServiceImpl;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("v1/api/employee")
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
+@Slf4j
+//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"https://cvs-sand.vercel.app","http://localhost:3000"}, allowedHeaders = "*")
 public class EmployeeController {
 	
 	@Autowired
@@ -28,6 +32,8 @@ public class EmployeeController {
 	
 	@PostMapping(value="/createEmployee", produces = "application/json")
 	public  ResponseEntity<Employee> registerEmployee(@RequestBody Employee  employee){
+		log.info("About to save employee.");
+		log.info(employee.toString());
 		Employee employeeTemp = employeeService.saveEmployee(employee);
 		return employeeTemp != null? new ResponseEntity<Employee>(employee, HttpStatus.OK): new ResponseEntity<>(HttpStatus.CONFLICT);
 

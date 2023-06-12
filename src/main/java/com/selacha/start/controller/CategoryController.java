@@ -18,7 +18,8 @@ import com.selacha.start.service.implementation.CategoryServiceImplementation;
 
 @RestController
 @RequestMapping("v1/api/category")
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = {"https://cvs-sand.vercel.app","http://localhost:3000"}, allowedHeaders = "*", allowCredentials = "true")
+//@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
 public class CategoryController {
 
 	@Autowired

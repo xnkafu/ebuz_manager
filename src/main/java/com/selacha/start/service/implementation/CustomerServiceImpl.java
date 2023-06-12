@@ -33,6 +33,10 @@ public class CustomerServiceImpl implements CustomerService{
 		if (add != null && tempCus.isEmpty()) {
 			customer = customerRepo.save(cus);
 		}
+		else if (tempCus.isPresent()) {
+			log.error("Customer with phone number already exist");
+			return null;
+		}
 		return customer;
 	}
 	

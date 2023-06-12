@@ -4,7 +4,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 import lombok.Data;
 
 @Entity

@@ -1,10 +1,7 @@
 package com.selacha.start.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.*;
+
 import lombok.Data;
 
 @Entity
@@ -17,5 +14,8 @@ public class ShipmentDate {
 	
 	@Column
 	private String date;
+	
+	@ManyToOne
+	private Employee employee;
 	
 }

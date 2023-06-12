@@ -14,27 +14,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.selacha.start.domain.Customer;
 import com.selacha.start.domain.Employee;
+import com.selacha.start.domain.Note;
 import com.selacha.start.service.implementation.CustomerServiceImpl;
 import com.selacha.start.service.implementation.EmployeeServiceImpl;
-import com.selacha.start.service.implementation.LoginService;
+import com.selacha.start.service.implementation.NoteServiceImpl;
 
 @RestController
-@RequestMapping("v1/api")
+@RequestMapping("v1/api/note")
 //@CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
-@CrossOrigin(origins = {"https://cvs-sand.vercel.app/","http://localhost:3000"}, allowedHeaders = "*", allowCredentials = "true")
-public class LoginController {
+@CrossOrigin(origins = {"https://cvs-sand.vercel.app/", "http://localhost:3000"}, allowedHeaders = "*", allowCredentials = "true")
+public class NotesController {
 	
 	@Autowired
-	private LoginService loginService;
+	private NoteServiceImpl noteService;
 	
 	
-	@PostMapping(value="/login", produces = "application/json")
-	public  ResponseEntity<Employee> login(@RequestBody Employee  employee){
-		Employee employeeTemp = loginService.login(employee);
-		return employeeTemp != null? new ResponseEntity<Employee>(employeeTemp, HttpStatus.OK): new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	@PostMapping(value="/createNote", produces = "application/json")
+	public  ResponseEntity<Note> registerEmployee(@RequestBody Note  note){
+		Note noteTemp = noteService.saveNote(note);
+		return noteTemp != null? new ResponseEntity<Note>(noteTemp, HttpStatus.OK): new ResponseEntity<>(HttpStatus.CONFLICT);
 
 	}
 	
+	@GetMapping(value="/notes", produces = "application/json")
+	public ResponseEntity<List<Note>> getEmployees(){
+		return new ResponseEntity<List<Note>>(noteService.allNotes(),HttpStatus.OK);
+		
+	}
 	
 
 }

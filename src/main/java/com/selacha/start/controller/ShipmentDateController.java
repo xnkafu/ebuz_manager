@@ -20,7 +20,8 @@ import com.selacha.start.service.implementation.ShipmentDateImpl;
 
 @RestController
 @RequestMapping("v1/api/shipmentDate")
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
+//@CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = {"https://cvs-sand.vercel.app/","http://localhost:3000"}, allowedHeaders = "*", allowCredentials = "true")
 public class ShipmentDateController {
 
 	@Autowired

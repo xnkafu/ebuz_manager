@@ -32,10 +32,11 @@ public class LoginService {
 	public Employee login(Employee emp) {
 		String username = emp.getUsername();
 		Optional<Employee> employee = loginRepo.findByUsername(username);
-		Employee empTemp = employee.get();
+		//Employee empTemp = employee.get();
 		
-		log.info(empTemp.toString());
-		if (!employee.isEmpty() && emp.getPassword().equals(empTemp.getPassword())) {
+		//log.info(empTemp.toString());
+		if (!employee.isEmpty() && emp.getPassword().equals(employee.get().getPassword()) &&
+				emp.getUsername().equals(employee.get().getUsername())) {
 			employee.get().setPassword("XXXXXXXX");
 			return employee.get();
 		}

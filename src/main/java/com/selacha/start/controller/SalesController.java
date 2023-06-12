@@ -15,7 +15,8 @@ import com.selacha.start.service.SalesService;
 
 @RestController
 @RequestMapping("v1/api/sales")
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
+//@CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = {"https://cvs-sand.vercel.app/","http://localhost:3000"}, allowedHeaders = "*", allowCredentials = "true")
 public class SalesController {
 
 	@Autowired

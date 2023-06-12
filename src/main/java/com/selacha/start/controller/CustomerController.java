@@ -18,7 +18,8 @@ import com.selacha.start.service.implementation.CustomerServiceImpl;
 
 @RestController
 @RequestMapping("v1/api/customer")
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = {"https://cvs-sand.vercel.app","http://localhost:3000"}, allowedHeaders = "*", allowCredentials = "true")
+//@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
 public class CustomerController {
 	
 	@Autowired
@@ -26,8 +27,10 @@ public class CustomerController {
 	
 	
 	@PostMapping(value="/createCustomer", produces = "application/json")
-	public  ResponseEntity<Customer> registerPerson(@RequestBody Customer  customer){
+	public  ResponseEntity<Customer> registerPerson(@RequestBody Customer  customer) {
+		
 		Customer customerTemp = customerService.saveCustomer(customer);
+		
 		return customerTemp != null? new ResponseEntity<Customer>(customer, HttpStatus.OK): new ResponseEntity<>(HttpStatus.CONFLICT);
 
 	}

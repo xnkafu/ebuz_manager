@@ -10,7 +10,10 @@ import com.selacha.start.domain.ShipmentDate;
 import com.selacha.start.repository.ShipmentDateRepo;
 import com.selacha.start.service.ShipmentDateService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class ShipmentDateImpl implements ShipmentDateService {
 	
 	@Autowired
@@ -39,6 +42,7 @@ public class ShipmentDateImpl implements ShipmentDateService {
 
 	@Override
 	public List<ShipmentDate> allShipmentDate() {
+		log.info(shipmentDateRepo.findAll().toString());
 		return shipmentDateRepo.findAll();
 	}
 

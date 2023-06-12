@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +35,7 @@ import com.selacha.start.repository.SalesRepo;
 import com.selacha.start.repository.ShipmentDateRepo;
 import com.selacha.start.service.ItemInventoryService;
 
-import jakarta.transaction.Transactional;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -186,6 +188,8 @@ public class ItemInventoryServiceImplementation implements ItemInventoryService 
 		Sales savedSale = salesRepo.save(sales);
 		
 		savedSale.setItemsSoldAsList(decodeSoldItems(itemsSold));
+		log.info("@@@@@@@@@@@@@@@@ here");
+		log.info(savedSale.toString());
 		
 		return savedSale;
 	}

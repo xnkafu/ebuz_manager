@@ -13,6 +13,8 @@ public class ItemStock {
 	
 	private int initialStock;
 	
+	private int expectedStock;
+	
 	private String shipmentDate;
 	
 	private int cartItemQty;
