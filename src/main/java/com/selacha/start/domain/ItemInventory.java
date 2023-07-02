@@ -26,7 +26,7 @@ public class ItemInventory {
 	private LocalDate dateAdded;
 	
 	@Column
-	private LocalDate dateSold;
+	private Date dateSold;
 	
 	//@Column
 	@ManyToOne

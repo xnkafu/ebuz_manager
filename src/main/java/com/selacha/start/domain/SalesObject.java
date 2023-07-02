@@ -1,5 +1,6 @@
 package com.selacha.start.domain;
 
+import java.sql.Date;
 import java.util.List;
 
 import lombok.Data;
@@ -13,7 +14,7 @@ public class SalesObject {
 	
 	private Employee employee;
 	
-	private String salesDate;
+	private Date salesDate;
 	
 	private double total;
 

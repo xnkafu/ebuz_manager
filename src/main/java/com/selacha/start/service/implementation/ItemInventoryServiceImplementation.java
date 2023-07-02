@@ -165,7 +165,8 @@ public class ItemInventoryServiceImplementation implements ItemInventoryService 
 				log.info("empl");
 				log.info(salesObject.getEmployee().toString());
 				inventory.setSoldBy(salesObject.getEmployee());
-				inventory.setDateSold(LocalDate.now());
+				inventory.setDateSold(salesObject.getSalesDate());
+				//inventory.setDateSold(LocalDate.now());
 				inventory.setCustomer(salesObject.getCustomer());
 				inventory.setConfirmationCode(confirmationCode);
 				inventory.setTimeStamp(LocalTime.now().toString());
@@ -178,6 +179,10 @@ public class ItemInventoryServiceImplementation implements ItemInventoryService 
 					itmStock.getItem().getId() + ":" + itmStock.getItem().getSellingPrice() + ":" +
 					itmStock.getCartItemPrice() + ":" + itmStock.getCartItemQty() + ":" +
 					itmStock.getItem().getDescription() + ":end" + ",";
+//			itemsSold += "name:" +itmStock.getItem().getName() + " model:" + itmStock.getItem().getModel() + "itemID:" +
+//					itmStock.getItem().getId() + " sellingPrice:" + itmStock.getItem().getSellingPrice() + " cartPrice:" +
+//					itmStock.getCartItemPrice() + " quantity:" + itmStock.getCartItemQty() + " description:" +
+//					itmStock.getItem().getDescription() + ":end" + ",";
 		}
 		sales.setItemsSold(itemsSold);
 		sales.setCustomer(salesObject.getCustomer());
@@ -187,6 +192,7 @@ public class ItemInventoryServiceImplementation implements ItemInventoryService 
 		
 		Sales savedSale = salesRepo.save(sales);
 		
+		//savedSale.setItemsSoldAsList(itemsSold);
 		savedSale.setItemsSoldAsList(decodeSoldItems(itemsSold));
 		log.info("@@@@@@@@@@@@@@@@ here");
 		log.info(savedSale.toString());

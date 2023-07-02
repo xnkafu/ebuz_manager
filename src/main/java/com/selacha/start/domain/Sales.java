@@ -1,7 +1,9 @@
 package com.selacha.start.domain;
 
 
+
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -20,7 +22,7 @@ public class Sales {
 	private long id;
 	
 	@Column
-	private String salesDate;
+	private Date salesDate;
 	
 	@Column
 	private String confirmationCode;
